@@ -7,7 +7,7 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 
 public class XMLWriter implements Writer {
-    private Logger logger = LoggerFactory.getLogger(XMLWriter.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public void makeFile(Products products, String filename) {
         JAXBContext context;

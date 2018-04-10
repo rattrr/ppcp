@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JsonWriter implements Writer {
-    private Logger logger = LoggerFactory.getLogger(JsonWriter.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public void makeFile(Products products, String filename) {
         try(FileWriter writer = new FileWriter(filename + ".json")){

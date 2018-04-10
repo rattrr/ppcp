@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Base64;
 
 public abstract class ProductParser {
-    private Logger logger = LoggerFactory.getLogger(ProductParser.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private String productClass;
 
     public Product getProduct(Element element) {
@@ -37,7 +37,7 @@ public abstract class ProductParser {
         try {
             return Float.valueOf(element.getElementsByClass("price").text().replace(",", "."));
         }catch (NumberFormatException e){
-            logger.info("{} has no price", parseName(element));
+            logger.error("{} has no price", parseName(element));
             return 0.0f;
         }
     }
@@ -52,7 +52,7 @@ public abstract class ProductParser {
 
         } catch (FileNotFoundException | IllegalArgumentException e){
             base64 = "";
-            logger.info("{} has no photo available", parseName(element));
+            logger.error("{} has no photo available", parseName(element));
         } catch (Exception e) {
             base64 = "";
             e.printStackTrace();

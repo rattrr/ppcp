@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class CeneoService implements ComparisonService {
-    private Logger logger = LoggerFactory.getLogger(CeneoService.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private ProductParser productParser;
     private Document currentPage;
 
@@ -27,7 +27,7 @@ public class CeneoService implements ComparisonService {
 
             System.out.println("Number of parsed products: " + products.size());
         } catch (IOException e) {
-            logger.error("Jsoup problem");
+            logger.error("GET request error");
         }
         return products;
     }
