@@ -1,3 +1,5 @@
+package parser;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -5,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import sun.misc.IOUtils;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;

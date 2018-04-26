@@ -1,3 +1,5 @@
+package parser;
+
 import org.jsoup.nodes.Element;
 
 public class GalleryViewProductParser extends ProductParser {

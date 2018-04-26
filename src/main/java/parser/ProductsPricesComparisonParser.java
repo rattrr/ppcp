@@ -1,3 +1,7 @@
+package parser;
+
+import writer.Writer;
+
 public class ProductsPricesComparisonParser {
     private String url;
     private ComparisonService comparisonService;

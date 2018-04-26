@@ -1,3 +1,5 @@
+package parser;
+
 import org.jsoup.nodes.Element;
 
 public class BoxViewProductParser extends ProductParser{
@@ -7,6 +9,6 @@ public class BoxViewProductParser extends ProductParser{
     }
 
     String parseName(Element element) {
-        return element.getElementsByClass("category-item-box-name").get(0).text();
+        return element.getElementsByClass("category-item-box-name").text();
     }
 }

@@ -1,3 +1,5 @@
+package parser;
+
 import org.jsoup.nodes.Element;
 
 public class ListViewProductParser extends ProductParser {
@@ -5,6 +7,6 @@ public class ListViewProductParser extends ProductParser {
         super.setProductClass("cat-prod-row");
     }
     String parseName(Element element) {
-        return element.getElementsByClass("cat-prod-row-name").get(0).text().replace("»", "");
+        return element.getElementsByClass("cat-prod-row-name").text().replace("»", "");
     }
 }

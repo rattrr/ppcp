@@ -1,3 +1,5 @@
+package parser;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,14 +12,14 @@ import java.util.LinkedList;
 
 public class CeneoService implements ComparisonService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private ProductParser productParser;
+    private LinkedList<ProductParser> productParsers = new LinkedList<>();
     private Document currentPage;
 
     public Products getProducts(String url){
         Products products = new Products();
         try {
             currentPage = Jsoup.connect(url).get();
-            productParser = getParserMatchingToPageView(currentPage.body().toString());
+            makeParsersMatchingToPageView(currentPage.body().toString());
             products.addAllProducts(parseProductsFromCurrentPage());
 
             while (hasNextPage()) {
@@ -43,7 +45,7 @@ public class CeneoService implements ComparisonService {
 
     private LinkedList<Product> parseProductsFromCurrentPage(){
         LinkedList<Product> products = new LinkedList<>();
-        if(productParser != null){
+        for(ProductParser productParser : productParsers){
             Elements pageElements = currentPage.getElementsByClass(productParser.getProductClass());
             for(Element element: pageElements){
                 products.add(productParser.getProduct(element));
@@ -52,15 +54,15 @@ public class CeneoService implements ComparisonService {
         return products;
     }
 
-    private ProductParser getParserMatchingToPageView(String pageBody){
-        if(pageBody.contains("cat-prod-row")){
-            return new ListViewProductParser();
-        }else if(pageBody.contains("category-item-box")){
-            return new BoxViewProductParser();
-        }else if(pageBody.contains("grid-item")){
-            return new GalleryViewProductParser();
-        }else{
-            return null;
+    private void makeParsersMatchingToPageView(String pageBody){
+        if(pageBody.contains("cat-prod-row")) {
+            productParsers.add(new ListViewProductParser());
+        }
+        if(pageBody.contains("category-item-box")) {
+            productParsers.add(new BoxViewProductParser());
+        }
+        if(pageBody.contains("grid-item")){
+            productParsers.add(new GalleryViewProductParser());
         }
     }
 }

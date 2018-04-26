@@ -1,5 +1,8 @@
+package writer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import parser.Products;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
